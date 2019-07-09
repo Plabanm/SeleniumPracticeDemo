@@ -1,6 +1,7 @@
 package selenium;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -23,11 +24,33 @@ public WebDriver driver;
 	
 	@After
 	public void tearDown() {
-		//driver.quit();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.quit();
 		
 	}
 	
+	@Test
+	public void checkBoxTest() {
+		Assert.assertFalse(driver.findElement(By.cssSelector("input[id*='SeniorCitizenDiscount']")).isSelected());
+
+		//Assert.assertFalse(true);System.out.println(driver.findElement(By.cssSelector("input[id*='SeniorCitizenDiscount']")).isSelected());
+
+		driver.findElement(By.cssSelector("input[id*='SeniorCitizenDiscount']")).click();
+
+		System.out.println(driver.findElement(By.cssSelector("input[id*='SeniorCitizenDiscount']")).isSelected());
+
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[id*='SeniorCitizenDiscount']")).isSelected());
+		
+	}
 	
+	@Test
+	public void calenderTest() {
+		
+	}
 	
 	@Test
 	public void dynamicDropdownTesting() {
